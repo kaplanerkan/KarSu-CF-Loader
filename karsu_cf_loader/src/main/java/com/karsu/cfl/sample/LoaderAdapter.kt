@@ -35,13 +35,18 @@ class LoaderAdapter(
             parent,
             false
         )
-        return LoaderViewHolder(binding)
+        val holder = LoaderViewHolder(binding)
+        binding.root.setOnClickListener {
+            val position = holder.bindingAdapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                onItemClick?.invoke(getItem(position))
+            }
+        }
+        return holder
     }
 
     override fun onBindViewHolder(holder: LoaderViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.bind(item)
-        holder.itemView.setOnClickListener { onItemClick?.invoke(item) }
+        holder.bind(getItem(position))
     }
 
     override fun onViewRecycled(holder: LoaderViewHolder) {

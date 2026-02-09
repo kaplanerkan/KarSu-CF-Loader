@@ -80,4 +80,12 @@ class MainActivity : AppCompatActivity() {
             binding.karSuCfLoaders.setColor(color)
         }
     }
+
+    override fun onDestroy() {
+        binding.seekBarProgress.clearOnChangeListeners()
+        binding.seekBarBorderWidth.clearOnChangeListeners()
+        binding.seekBarAmplitude.clearOnChangeListeners()
+        binding.sliderWaveColor.clearOnChangeListeners()
+        super.onDestroy()
+    }
 }

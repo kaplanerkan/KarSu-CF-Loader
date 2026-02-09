@@ -235,6 +235,9 @@ class KarSuCfLoaders @JvmOverloads constructor(
     /** Minimum text size in pixels for auto-sizing. */
     private var _autoSizeMinTextSize: Float = spToPx(DEFAULT_AUTO_SIZE_MIN_SP)
 
+    /** Cached auto-fit text size result. Invalidated when text or size changes. */
+    private var _cachedAutoFitSize: Float = -1f
+
     // endregion
 
     // region Text Paint & Layout (cached)
@@ -268,6 +271,8 @@ class KarSuCfLoaders @JvmOverloads constructor(
     // region Animation
 
     private var animatorSetWave: AnimatorSet? = null
+    private var progressAnimator: AnimatorSet? = null
+    private var waveBitmap: Bitmap? = null
     private var firstLoadBitmap = true
 
     // endregion
@@ -415,8 +420,10 @@ class KarSuCfLoaders @JvmOverloads constructor(
         val maxTextWidth = (circleRadius * 2 * 0.85f).toInt()
 
         // Auto-size text if enabled (adjusts textPaint.textSize before layout)
-        if (_autoSizeText) {
-            autoFitTextSize(textPaint, displayText, maxTextWidth.toFloat())
+        if (_autoSizeText && textLayoutDirty) {
+            _cachedAutoFitSize = autoFitTextSize(textPaint, displayText, maxTextWidth.toFloat())
+        } else if (_autoSizeText && _cachedAutoFitSize > 0f) {
+            textPaint.textSize = _cachedAutoFitSize
         }
 
         // Rebuild primary text layout if dirty
@@ -488,7 +495,7 @@ class KarSuCfLoaders @JvmOverloads constructor(
      * Binary search for the largest text size that fits within [maxWidth].
      * Adjusts [paint]'s textSize in place without calling invalidate.
      */
-    private fun autoFitTextSize(paint: TextPaint, text: String, maxWidth: Float) {
+    private fun autoFitTextSize(paint: TextPaint, text: String, maxWidth: Float): Float {
         var hi = _textSize
         var lo = _autoSizeMinTextSize
 
@@ -502,6 +509,7 @@ class KarSuCfLoaders @JvmOverloads constructor(
             }
         }
         paint.textSize = lo
+        return lo
     }
 
     /**
@@ -523,8 +531,13 @@ class KarSuCfLoaders @JvmOverloads constructor(
     private fun loadBitmap() {
         if (currentDrawable == drawable && !firstLoadBitmap) return
 
+        // Recycle previous image bitmap
+        val oldImage = image
         currentDrawable = drawable
         image = drawableToBitmap(currentDrawable)
+        if (oldImage != null && oldImage !== image) {
+            oldImage.recycle()
+        }
         firstLoadBitmap = false
         updateShader()
     }
@@ -542,8 +555,12 @@ class KarSuCfLoaders @JvmOverloads constructor(
     private fun updateShader() {
         val currentImage = image ?: return
 
-        // Crop center image
-        image = cropBitmap(currentImage)
+        // Crop center image, recycle old if different
+        val cropped = cropBitmap(currentImage)
+        if (cropped !== currentImage) {
+            currentImage.recycle()
+        }
+        image = cropped
 
         val croppedImage = image ?: return
 
@@ -568,6 +585,10 @@ class KarSuCfLoaders @JvmOverloads constructor(
         val height = height
 
         if (width <= 0 || height <= 0) return
+
+        // Recycle previous wave bitmap
+        waveBitmap?.recycle()
+        waveBitmap = null
 
         val defaultAngularFrequency = 2.0 * PI / DEFAULT_WAVE_LENGTH_RATIO / width
         val defaultAmplitude = height * DEFAULT_AMPLITUDE_RATIO
@@ -608,6 +629,7 @@ class KarSuCfLoaders @JvmOverloads constructor(
             )
         }
 
+        waveBitmap = bitmap
         waveShader = BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.CLAMP)
         wavePaint.shader = waveShader
     }
@@ -713,6 +735,7 @@ class KarSuCfLoaders @JvmOverloads constructor(
             textPaint.clearShadowLayer()
         }
         textLayoutDirty = true
+        _cachedAutoFitSize = -1f
     }
 
     /**
@@ -797,12 +820,14 @@ class KarSuCfLoaders @JvmOverloads constructor(
         // Update accessibility description
         contentDescription = "Loading: $_currentProgress percent"
 
+        progressAnimator?.cancel()
+
         val waterLevelAnim = ObjectAnimator.ofFloat(
             this, "waterLevelRatio", waterLevelRatio, 1f - (progress.toFloat() / 100)
         )
         waterLevelAnim.duration = milliseconds.toLong()
         waterLevelAnim.interpolator = DecelerateInterpolator()
-        AnimatorSet().apply {
+        progressAnimator = AnimatorSet().apply {
             play(waterLevelAnim)
             start()
         }
@@ -851,6 +876,7 @@ class KarSuCfLoaders @JvmOverloads constructor(
     fun setText(text: String?) {
         _text = text
         textLayoutDirty = true
+        _cachedAutoFitSize = -1f
         invalidate()
     }
 
@@ -1072,6 +1098,23 @@ class KarSuCfLoaders @JvmOverloads constructor(
      */
     fun recycle() {
         cancel()
+        progressAnimator?.cancel()
+        progressAnimator = null
+
+        // Release bitmap resources
+        image?.recycle()
+        image = null
+        waveBitmap?.recycle()
+        waveBitmap = null
+
+        // Clear shader references
+        waveShader = null
+        wavePaint.shader = null
+        paint.shader = null
+        currentDrawable = null
+        firstLoadBitmap = true
+
+        // Clear text layout cache
         textLayout = null
         subtitleLayout = null
         textLayoutDirty = true
@@ -1162,6 +1205,8 @@ class KarSuCfLoaders @JvmOverloads constructor(
 
     override fun onDetachedFromWindow() {
         cancel()
+        progressAnimator?.cancel()
+        progressAnimator = null
         super.onDetachedFromWindow()
     }
 

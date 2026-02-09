@@ -30,6 +30,7 @@ class TextControlsActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityTextControlsBinding
+    private var textWatcher: TextWatcher? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +48,7 @@ class TextControlsActivity : AppCompatActivity() {
      */
     private fun setupTextControls() {
         // Text input: sets custom overlay text (overrides progress text)
-        binding.editTextOverlay.addTextChangedListener(object : TextWatcher {
+        textWatcher = object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val text = s?.toString()?.ifEmpty { null }
                 binding.karSuCfLoadersNoSrc.setText(text)
@@ -56,7 +57,8 @@ class TextControlsActivity : AppCompatActivity() {
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
+        }
+        binding.editTextOverlay.addTextChangedListener(textWatcher)
 
         // Show progress % toggle
         binding.switchShowProgress.setOnCheckedChangeListener { _, isChecked ->
@@ -102,5 +104,17 @@ class TextControlsActivity : AppCompatActivity() {
             val color = Color.HSVToColor(floatArrayOf(value, 1f, 1f))
             binding.karSuCfLoadersNoSrc.setColor(color)
         }
+    }
+
+    override fun onDestroy() {
+        binding.editTextOverlay.removeTextChangedListener(textWatcher)
+        textWatcher = null
+        binding.switchShowProgress.setOnCheckedChangeListener(null)
+        binding.seekBarTextSize.clearOnChangeListeners()
+        binding.seekBarTextOffsetX.clearOnChangeListeners()
+        binding.seekBarTextOffsetY.clearOnChangeListeners()
+        binding.sliderTextColor.clearOnChangeListeners()
+        binding.sliderWaveColor.clearOnChangeListeners()
+        super.onDestroy()
     }
 }
