@@ -4,7 +4,13 @@ Circular Fillable Loader widget for Android with wave animation, text overlay, a
 
 A custom Android widget with rich text overlay, subtitle, auto-sizing, and shadow support.
 
-<!-- Ekran goruntuleri screenshots/ dizininde bulunur -->
+## Screenshots
+
+| Main Controls | Text Controls | RecyclerView |
+|:---:|:---:|:---:|
+| ![Main](screenshots/scrcpy_7UqcI31Jaw.png) | ![Text Controls](screenshots/scrcpy_nNosFscUke.png) | ![RecyclerView](screenshots/scrcpy_rKyPHnW1A7.png) |
+
+https://github.com/kaplanerkan/KarSu-CF-Loader/raw/main/screenshots/scrcpy_jleYpcQWms.mp4
 
 ## Features
 
