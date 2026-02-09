@@ -18,7 +18,7 @@ local.properties
 .DS_Store
 Thumbs.db
 
-# Claude Code
+# Tool config
 .claude/
 
 # Android
