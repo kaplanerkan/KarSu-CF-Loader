@@ -79,6 +79,7 @@ import android.text.StaticLayout
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
@@ -157,7 +158,7 @@ class KarSuCfLoaders @JvmOverloads constructor(
     private var _text: String? = null
 
     /** Primary text size in pixels. */
-    private var _textSize: Float = DEFAULT_TEXT_SIZE_SP * resources.displayMetrics.scaledDensity
+    private var _textSize: Float = spToPx(DEFAULT_TEXT_SIZE_SP)
 
     /** Primary text color. */
     private var _textColor: Int = DEFAULT_TEXT_COLOR
@@ -210,7 +211,7 @@ class KarSuCfLoaders @JvmOverloads constructor(
     private var _subtitleText: String? = null
 
     /** Subtitle text size in pixels. */
-    private var _subtitleTextSize: Float = DEFAULT_SUBTITLE_TEXT_SIZE_SP * resources.displayMetrics.scaledDensity
+    private var _subtitleTextSize: Float = spToPx(DEFAULT_SUBTITLE_TEXT_SIZE_SP)
 
     /** Subtitle text color. */
     private var _subtitleTextColor: Int = DEFAULT_TEXT_COLOR
@@ -232,7 +233,7 @@ class KarSuCfLoaders @JvmOverloads constructor(
     private var _autoSizeText: Boolean = false
 
     /** Minimum text size in pixels for auto-sizing. */
-    private var _autoSizeMinTextSize: Float = DEFAULT_AUTO_SIZE_MIN_SP * resources.displayMetrics.scaledDensity
+    private var _autoSizeMinTextSize: Float = spToPx(DEFAULT_AUTO_SIZE_MIN_SP)
 
     // endregion
 
@@ -296,7 +297,7 @@ class KarSuCfLoaders @JvmOverloads constructor(
             _text = getString(R.styleable.KarSuCfLoaders_cfl_text)
             _textSize = getDimension(
                 R.styleable.KarSuCfLoaders_cfl_text_size,
-                DEFAULT_TEXT_SIZE_SP * context.resources.displayMetrics.scaledDensity
+                spToPx(DEFAULT_TEXT_SIZE_SP)
             )
             _textColor = getColor(R.styleable.KarSuCfLoaders_cfl_text_color, DEFAULT_TEXT_COLOR)
             _textFontFamily = getString(R.styleable.KarSuCfLoaders_cfl_text_font_family)
@@ -320,7 +321,7 @@ class KarSuCfLoaders @JvmOverloads constructor(
             _subtitleText = getString(R.styleable.KarSuCfLoaders_cfl_subtitle_text)
             _subtitleTextSize = getDimension(
                 R.styleable.KarSuCfLoaders_cfl_subtitle_text_size,
-                DEFAULT_SUBTITLE_TEXT_SIZE_SP * context.resources.displayMetrics.scaledDensity
+                spToPx(DEFAULT_SUBTITLE_TEXT_SIZE_SP)
             )
             _subtitleTextColor = getColor(R.styleable.KarSuCfLoaders_cfl_subtitle_text_color, DEFAULT_TEXT_COLOR)
             _subtitleFontFamily = getString(R.styleable.KarSuCfLoaders_cfl_subtitle_font_family)
@@ -331,7 +332,7 @@ class KarSuCfLoaders @JvmOverloads constructor(
             _autoSizeText = getBoolean(R.styleable.KarSuCfLoaders_cfl_auto_size_text, false)
             _autoSizeMinTextSize = getDimension(
                 R.styleable.KarSuCfLoaders_cfl_auto_size_min_text_size,
-                DEFAULT_AUTO_SIZE_MIN_SP * context.resources.displayMetrics.scaledDensity
+                spToPx(DEFAULT_AUTO_SIZE_MIN_SP)
             )
 
             // Read progress last (triggers animation and uses _showProgressText)
@@ -1199,6 +1200,12 @@ class KarSuCfLoaders @JvmOverloads constructor(
         val alpha = (Color.alpha(color) * factor).roundToInt()
         return Color.argb(alpha, Color.red(color), Color.green(color), Color.blue(color))
     }
+
+    /**
+     * Converts a value in SP (scaled pixels) to PX using [TypedValue.applyDimension].
+     */
+    private fun spToPx(sp: Float): Float =
+        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, resources.displayMetrics)
 
     // endregion
 }

@@ -18,6 +18,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.util.TypedValue
 import androidx.appcompat.app.AppCompatActivity
 import com.larswerkman.lobsterpicker.OnColorListener
 import com.karsu.cfl.sample.databinding.ActivityTextControlsBinding
@@ -66,7 +67,7 @@ class TextControlsActivity : AppCompatActivity() {
         // Text size slider (in sp, converted to px)
         binding.seekBarTextSize.addOnChangeListener { _, value, _ ->
             val sp = value.toInt()
-            val px = sp * resources.displayMetrics.scaledDensity
+            val px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp.toFloat(), resources.displayMetrics)
             binding.labelTextSize.text = "Text Size: $sp"
             Log.d(TAG, "TextSize: ${sp}sp (px: $px)")
             binding.karSuCfLoadersNoSrc.setTextSize(px)
