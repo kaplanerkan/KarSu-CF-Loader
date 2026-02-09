@@ -122,8 +122,11 @@ The sample app contains three demo screens:
 
 ## Usage
 
+### XML
+
 ```xml
 <com.karsu.cfl.KarSuCfLoaders
+    android:id="@+id/loader"
     android:layout_width="200dp"
     android:layout_height="wrap_content"
     android:src="@drawable/your_image"
@@ -135,6 +138,49 @@ The sample app contains three demo screens:
     app:cfl_wave_color="#4CAF50" />
 ```
 
+### Kotlin
+
+```kotlin
+val loader = findViewById<KarSuCfLoaders>(R.id.loader)
+
+// Progress & wave
+loader.setProgress(75)
+loader.setColor(Color.parseColor("#4CAF50"))
+loader.setAmplitudeRatio(0.03f)
+loader.setWaveSpeed(1500)
+loader.setWaveEnabled(true)
+loader.setBorderWidth(8f)
+
+// Primary text
+loader.setText("Uploading...")
+loader.setTextSize(48f)
+loader.setTextColor(Color.WHITE)
+loader.setTextStyle(Typeface.BOLD)
+loader.setTextFontFamily("sans-serif-medium")
+loader.setTextOffsetY(80f)
+loader.setTextShadow(4f, 2f, 2f, Color.BLACK)
+
+// Auto progress text
+loader.setShowProgressText(true)
+loader.setProgressTextFormat("%d%%")
+
+// Subtitle
+loader.setSubtitleText("Please wait...")
+loader.setSubtitleTextSize(28f)
+loader.setSubtitleTextColor(Color.LTGRAY)
+
+// Auto-size (shrinks text to fit circle)
+loader.setAutoSizeText(true)
+loader.setAutoSizeMinTextSize(10f)
+
+// RecyclerView: call in onViewRecycled()
+loader.recycle()
+```
+
+### ProGuard
+
+No special ProGuard rules are needed. The library works with the default Android ProGuard configuration.
+
 ## Acknowledgements
 
 This project was inspired by [CircularFillableLoaders](https://github.com/lopspower/CircularFillableLoaders) by Mikhael Lopez. The original wave-fill concept served as a starting point, and the library was rewritten in Kotlin with significant enhancements including rich text overlay, subtitle support, auto-sizing, text shadow, and improved RecyclerView compatibility.
@@ -144,6 +190,18 @@ This project was inspired by [CircularFillableLoaders](https://github.com/lopspo
 - Min SDK: 21 (Android 5.0)
 - Target SDK: 36
 - Kotlin / JVM 17
+
+## Changelog
+
+### v2.0.0
+- Full Kotlin rewrite with modern Android practices
+- Rich text overlay: font family, style, size, color, letter spacing, positioning
+- Subtitle text support
+- Auto progress percentage display with custom format
+- Text shadow effects
+- Auto-size text to fit within circle
+- Improved RecyclerView compatibility with `recycle()` method
+- JitPack publishing support
 
 ## License
 
