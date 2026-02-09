@@ -49,7 +49,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.github.kaplanerkan"
                 artifactId = "karsu_cf_loaders"
-                version = "2.0.0"
+                version = "2.0.1"
 
                 pom {
                     name.set("KarSu CF Loaders")

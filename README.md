@@ -32,7 +32,7 @@ Add the dependency to your module's `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("com.github.kaplanerkan:KarSu-CF-Loader:v2.0.0")
+    implementation("com.github.kaplanerkan:KarSu-CF-Loader:v2.0.1")
 }
 ```
 
@@ -192,6 +192,14 @@ This project was inspired by [CircularFillableLoaders](https://github.com/lopspo
 - Kotlin / JVM 17
 
 ## Changelog
+
+### v2.0.1
+- Fix memory leaks: proper bitmap recycling in loadBitmap, updateShader, updateWaveShader
+- Fix ANR risk: store and cancel progress AnimatorSet to prevent orphaned animators
+- Complete recycle() method with full resource cleanup (bitmaps, shaders, paints)
+- Cache autoFitTextSize result to avoid binary search on every draw frame
+- Clear Activity listeners in onDestroy to prevent listener leaks
+- Fix click listener accumulation in RecyclerView adapter
 
 ### v2.0.0
 - Full Kotlin rewrite with modern Android practices
