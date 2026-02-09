@@ -56,7 +56,7 @@
             app:cfl_text_color="@android:color/white"
             app:cfl_text_size="24sp"
             app:cfl_text_style="bold"
-            app:cfl_text_offset_y="60dp"
+            app:cfl_text_offset_y="80dp"
             app:cfl_wave_color="?colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
