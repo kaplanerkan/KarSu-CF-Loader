@@ -37,3 +37,4 @@ Thumbs.db
 
 # Google Services (if applicable)
 google-services.json
+.kotlin/
