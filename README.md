@@ -35,55 +35,60 @@ The sample app contains three demo screens:
 
 ## XML Attributes
 
-### Core
-| Attribute | Format | Description |
-|-----------|--------|-------------|
-| `cfl_progress` | integer | Fill level (0-100) |
-| `cfl_border` | boolean | Show/hide border |
-| `cfl_border_width` | dimension | Border stroke width |
-| `cfl_wave_color` | color | Wave fill color |
-| `cfl_wave_amplitude` | float | Wave height ratio |
-| `cfl_wave_enabled` | boolean | Enable/disable wave animation |
-| `cfl_wave_speed` | integer | Wave cycle duration (ms) |
+### Core - Loader & Wave
 
-### Text
-| Attribute | Format | Description |
-|-----------|--------|-------------|
-| `cfl_text` | string | Custom overlay text |
-| `cfl_text_size` | dimension | Text size |
-| `cfl_text_color` | color | Text color |
-| `cfl_text_font_family` | string | Font family |
-| `cfl_text_style` | enum | normal, bold, italic, bold_italic |
-| `cfl_text_letter_spacing` | float | Letter spacing (em) |
-| `cfl_text_offset_x` | dimension | Horizontal text offset |
-| `cfl_text_offset_y` | dimension | Vertical text offset |
-| `cfl_text_width_mode` | enum | wrap_content, match_parent |
-| `cfl_show_progress_text` | boolean | Auto-display progress % |
-| `cfl_progress_text_format` | string | Progress format (default: "%d%%") |
+| Attribute | Format | Default | Description |
+|-----------|--------|---------|-------------|
+| `cfl_progress` | integer | 0 | Fill level (0-100). Controls how much of the circle is filled with the wave. 0 = empty, 100 = full. The transition is animated with a decelerate effect. |
+| `cfl_border` | boolean | true | Show or hide the circular border around the loader. |
+| `cfl_border_width` | dimension | 10dp | Thickness of the circular border stroke. Set to 0 to remove the border completely. |
+| `cfl_wave_color` | color | black | The color of the wave fill inside the circle. Accepts any color value (`#FF9800`, `?colorPrimary`, etc.). |
+| `cfl_wave_amplitude` | float | 0.05 | Wave height ratio (0.0 - 0.05). Controls how "wavy" the surface is. Low values (0.001) create a calm, flat surface. High values (0.05) create visible waves. |
+| `cfl_wave_enabled` | boolean | true | Enable or disable the wave animation. Disabling saves battery when animation is not needed. |
+| `cfl_wave_speed` | integer | 1000 | Duration of one full wave cycle in milliseconds. Lower values = faster wave movement, higher values = slower, calmer wave. |
+
+### Text - Primary Overlay
+
+| Attribute | Format | Default | Description |
+|-----------|--------|---------|-------------|
+| `cfl_text` | string | null | Custom text displayed at the center of the circle. When set, this overrides the auto progress text. Set to null or empty to fall back to progress text. |
+| `cfl_text_size` | dimension | 14sp | Font size of the primary text in sp or dp. |
+| `cfl_text_color` | color | white | Color of the primary text. |
+| `cfl_text_font_family` | string | default | Font family name (e.g., `sans-serif-medium`, `monospace`). Uses system default if not specified. |
+| `cfl_text_style` | enum | normal | Text style: `normal`, `bold`, `italic`, or `bold_italic`. |
+| `cfl_text_letter_spacing` | float | 0 | Letter spacing in ems. Positive values spread letters apart, negative values bring them closer. |
+| `cfl_text_offset_x` | dimension | 0 | Horizontal offset from center. Positive = move right, negative = move left. Useful for fine-tuning text position. |
+| `cfl_text_offset_y` | dimension | 0 | Vertical offset from center. Positive = move down, negative = move up. Use a large positive value (e.g., 80dp) to place text at the bottom of the circle. |
+| `cfl_text_width_mode` | enum | wrap_content | `wrap_content` sizes text naturally. `match_parent` fills ~85% of circle diameter, useful for long text that should wrap within the circle. |
+| `cfl_show_progress_text` | boolean | false | When true, automatically displays the current progress as a percentage (e.g., "80%"). Only shown when no custom text is set via `cfl_text`. |
+| `cfl_progress_text_format` | string | "%d%%" | Format string for auto progress text. Must contain one integer placeholder. Example: `"%d%%"` produces "80%", `"Step %d"` produces "Step 80". |
 
 ### Subtitle
-| Attribute | Format | Description |
-|-----------|--------|-------------|
-| `cfl_subtitle_text` | string | Subtitle text |
-| `cfl_subtitle_text_size` | dimension | Subtitle size |
-| `cfl_subtitle_text_color` | color | Subtitle color |
-| `cfl_subtitle_font_family` | string | Subtitle font family |
-| `cfl_subtitle_text_style` | enum | normal, bold, italic, bold_italic |
-| `cfl_subtitle_offset_y` | dimension | Subtitle vertical offset |
+
+| Attribute | Format | Default | Description |
+|-----------|--------|---------|-------------|
+| `cfl_subtitle_text` | string | null | Secondary text displayed below the primary text. Useful for status messages like "Loading...", "Please wait", etc. |
+| `cfl_subtitle_text_size` | dimension | 12sp | Font size of the subtitle. |
+| `cfl_subtitle_text_color` | color | white | Color of the subtitle text. |
+| `cfl_subtitle_font_family` | string | default | Font family for the subtitle. |
+| `cfl_subtitle_text_style` | enum | normal | Subtitle text style: `normal`, `bold`, `italic`, or `bold_italic`. |
+| `cfl_subtitle_offset_y` | dimension | 0 | Extra vertical gap between the primary text and subtitle. Positive values increase the spacing. |
 
 ### Text Shadow
-| Attribute | Format | Description |
-|-----------|--------|-------------|
-| `cfl_text_shadow_color` | color | Shadow color |
-| `cfl_text_shadow_radius` | float | Shadow blur radius |
-| `cfl_text_shadow_dx` | float | Shadow horizontal offset |
-| `cfl_text_shadow_dy` | float | Shadow vertical offset |
+
+| Attribute | Format | Default | Description |
+|-----------|--------|---------|-------------|
+| `cfl_text_shadow_color` | color | transparent | Shadow color. Set to a visible color (e.g., `#80000000` for semi-transparent black) to enable shadow. |
+| `cfl_text_shadow_radius` | float | 0 | Shadow blur radius. Higher values create a softer, more spread-out shadow. Set to 0 to disable shadow. |
+| `cfl_text_shadow_dx` | float | 0 | Horizontal shadow offset. Positive = shadow moves right. |
+| `cfl_text_shadow_dy` | float | 0 | Vertical shadow offset. Positive = shadow moves down. |
 
 ### Auto-Size
-| Attribute | Format | Description |
-|-----------|--------|-------------|
-| `cfl_auto_size_text` | boolean | Enable auto-sizing |
-| `cfl_auto_size_min_text_size` | dimension | Minimum auto-size |
+
+| Attribute | Format | Default | Description |
+|-----------|--------|---------|-------------|
+| `cfl_auto_size_text` | boolean | false | When enabled, the text size is automatically reduced to fit within the circle. Useful when the text content is dynamic and might overflow. |
+| `cfl_auto_size_min_text_size` | dimension | 8sp | Minimum text size when auto-sizing is active. Text will not be shrunk below this size even if it overflows. |
 
 ## Usage
 
