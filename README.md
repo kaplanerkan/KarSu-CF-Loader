@@ -100,6 +100,10 @@ The sample app contains three demo screens:
     app:cfl_wave_color="#4CAF50" />
 ```
 
+## Acknowledgements
+
+This project was inspired by [CircularFillableLoaders](https://github.com/lopspower/CircularFillableLoaders) by Mikhael Lopez. The original wave-fill concept served as a starting point, and the library was rewritten in Kotlin with significant enhancements including rich text overlay, subtitle support, auto-sizing, text shadow, and improved RecyclerView compatibility.
+
 ## Requirements
 
 - Min SDK: 21 (Android 5.0)
