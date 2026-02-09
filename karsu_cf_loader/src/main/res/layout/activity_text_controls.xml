@@ -25,20 +25,18 @@
         <!-- Loader widget without image -->
         <com.karsu.cfl.KarSuCfLoaders
             android:id="@+id/karSuCfLoadersNoSrc"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:layout_marginTop="16dp"
             app:cfl_progress="60"
             app:cfl_show_progress_text="true"
-            app:cfl_text_color="@android:color/white"
+            app:cfl_text_color="#00BCD4"
             app:cfl_text_size="24sp"
             app:cfl_text_style="bold"
             app:cfl_wave_color="#FF9800"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
-            app:layout_constraintWidth_max="200dp"
-            app:layout_constraintWidth_percent="0.4"
             tools:ignore="ContentDescription" />
 
         <!-- Text controls card -->
