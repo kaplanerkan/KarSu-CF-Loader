@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">KarSu CF Loaders</string>
+
+    <!-- Loader controls -->
+    <string name="label_progress_default">Progress: 80</string>
+    <string name="label_border_width_default">Border Width: 10</string>
+    <string name="label_amplitude_default">Amplitude: 50</string>
+    <string name="label_color">Color</string>
+
+    <!-- Text controls -->
+    <string name="hint_overlay_text">Enter overlay text</string>
+    <string name="label_text_size_default">Text Size: 14</string>
+    <string name="label_show_progress">Show Progress %</string>
+    <string name="label_text_offset_x_default">Offset X: 0</string>
+    <string name="label_text_offset_y_default">Offset Y: 0</string>
+    <string name="label_text_color">Text Color</string>
+
+    <!-- Navigation -->
+    <string name="btn_recyclerview_demo">RecyclerView Demo</string>
+    <string name="btn_text_controls_demo">Text Controls Demo</string>
+    <string name="recyclerview_title">Loader List</string>
+    <string name="text_controls_title">Text Controls</string>
+</resources>

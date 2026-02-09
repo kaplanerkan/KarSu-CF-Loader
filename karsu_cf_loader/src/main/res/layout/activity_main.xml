@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:colorBackground"
+    android:fillViewport="true"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="24dp">
+
+        <!-- Navigation to RecyclerView demo -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRecyclerViewDemo"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_recyclerview_demo"
+            app:icon="@android:drawable/ic_menu_sort_by_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Navigation to Text Controls demo -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTextControlsDemo"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/btn_text_controls_demo"
+            app:icon="@android:drawable/ic_menu_edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnRecyclerViewDemo" />
+
+        <!-- Loader widget with image -->
+        <com.karsu.cfl.KarSuCfLoaders
+            android:id="@+id/karSuCfLoaders"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/logo"
+            app:cfl_progress="80"
+            app:cfl_show_progress_text="true"
+            app:cfl_text_color="@android:color/white"
+            app:cfl_text_size="24sp"
+            app:cfl_text_style="bold"
+            app:cfl_subtitle_text="Loading..."
+            app:cfl_subtitle_text_size="12sp"
+            app:cfl_subtitle_text_color="@android:color/white"
+            app:cfl_wave_color="?colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnTextControlsDemo"
+            app:layout_constraintWidth_max="200dp"
+            app:layout_constraintWidth_percent="0.4"
+            tools:ignore="ContentDescription" />
+
+        <!-- Loader controls card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/controlsCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="?colorSurfaceVariant"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:contentPadding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/karSuCfLoaders">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/labelProgress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_progress_default"
+                    android:textAppearance="?textAppearanceLabelMedium"
+                    android:textColor="?colorOnSurfaceVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/seekBarProgress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:stepSize="1"
+                    android:value="80"
+                    android:valueFrom="0"
+                    android:valueTo="100"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/labelProgress" />
+
+                <TextView
+                    android:id="@+id/labelBorderWidth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/label_border_width_default"
+                    android:textAppearance="?textAppearanceLabelMedium"
+                    android:textColor="?colorOnSurfaceVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/seekBarProgress" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/seekBarBorderWidth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:stepSize="1"
+                    android:value="10"
+                    android:valueFrom="0"
+                    android:valueTo="100"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/labelBorderWidth" />
+
+                <TextView
+                    android:id="@+id/labelAmplitude"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/label_amplitude_default"
+                    android:textAppearance="?textAppearanceLabelMedium"
+                    android:textColor="?colorOnSurfaceVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/seekBarBorderWidth" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/seekBarAmplitude"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:stepSize="1"
+                    android:value="50"
+                    android:valueFrom="1"
+                    android:valueTo="100"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/labelAmplitude" />
+
+                <TextView
+                    android:id="@+id/labelColor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/label_color"
+                    android:textAppearance="?textAppearanceLabelMedium"
+                    android:textColor="?colorOnSurfaceVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/seekBarAmplitude" />
+
+                <com.larswerkman.lobsterpicker.sliders.LobsterShadeSlider
+                    android:id="@+id/shadeslider"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/labelColor" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

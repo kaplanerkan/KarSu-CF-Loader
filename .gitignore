@@ -1,0 +1,39 @@
+# Built outputs
+/build/
+**/build/
+
+# Gradle
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Local configuration
+local.properties
+
+# IDE - Android Studio / IntelliJ
+.idea/
+*.iml
+.idea_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Claude Code
+.claude/
+
+# Android
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+/captures/
+.externalNativeBuild/
+.cxx/
+
+# Keystore (do not commit signing keys)
+*.jks
+*.keystore
+
+# Google Services (if applicable)
+google-services.json

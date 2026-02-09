@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="KarSuCfLoaders">
+
+        <!-- Core loader properties -->
+        <attr name="cfl_progress" format="integer" />
+        <attr name="cfl_border" format="boolean" />
+        <attr name="cfl_border_width" format="dimension" />
+        <attr name="cfl_wave_color" format="color" />
+        <attr name="cfl_wave_amplitude" format="float" />
+
+        <!-- Wave animation control -->
+        <attr name="cfl_wave_enabled" format="boolean" />
+        <attr name="cfl_wave_speed" format="integer" />
+
+        <!-- Primary text overlay -->
+        <attr name="cfl_text" format="string" />
+        <attr name="cfl_text_size" format="dimension" />
+        <attr name="cfl_text_color" format="color" />
+        <attr name="cfl_text_font_family" format="string" />
+        <attr name="cfl_text_style" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+            <enum name="bold_italic" value="3" />
+        </attr>
+        <attr name="cfl_text_letter_spacing" format="float" />
+        <attr name="cfl_text_offset_x" format="dimension" />
+        <attr name="cfl_text_offset_y" format="dimension" />
+        <attr name="cfl_text_width_mode" format="enum">
+            <enum name="wrap_content" value="0" />
+            <enum name="match_parent" value="1" />
+        </attr>
+
+        <!-- Text shadow -->
+        <attr name="cfl_text_shadow_color" format="color" />
+        <attr name="cfl_text_shadow_radius" format="float" />
+        <attr name="cfl_text_shadow_dx" format="float" />
+        <attr name="cfl_text_shadow_dy" format="float" />
+
+        <!-- Auto progress percentage text -->
+        <attr name="cfl_show_progress_text" format="boolean" />
+        <attr name="cfl_progress_text_format" format="string" />
+
+        <!-- Subtitle text (displayed below primary text) -->
+        <attr name="cfl_subtitle_text" format="string" />
+        <attr name="cfl_subtitle_text_size" format="dimension" />
+        <attr name="cfl_subtitle_text_color" format="color" />
+        <attr name="cfl_subtitle_font_family" format="string" />
+        <attr name="cfl_subtitle_text_style" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+            <enum name="bold_italic" value="3" />
+        </attr>
+        <attr name="cfl_subtitle_offset_y" format="dimension" />
+
+        <!-- Auto-size text to fit within circle -->
+        <attr name="cfl_auto_size_text" format="boolean" />
+        <attr name="cfl_auto_size_min_text_size" format="dimension" />
+
+    </declare-styleable>
+
+</resources>
