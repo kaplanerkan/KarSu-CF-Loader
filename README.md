@@ -12,6 +12,30 @@ A custom Android widget with rich text overlay, subtitle, auto-sizing, and shado
 
 https://github.com/user-attachments/assets/49aad72a-8ef0-4126-b0e3-f1c9d88c175a
 
+[![](https://jitpack.io/v/kaplanerkan/KarSu-CF-Loader.svg)](https://jitpack.io/#kaplanerkan/KarSu-CF-Loader)
+
+## Installation
+
+Add JitPack repository to your `settings.gradle.kts`:
+
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://jitpack.io") }
+    }
+}
+```
+
+Add the dependency to your module's `build.gradle.kts`:
+
+```kotlin
+dependencies {
+    implementation("com.github.kaplanerkan:KarSu-CF-Loader:v2.0.0")
+}
+```
+
 ## Features
 
 - Circular wave-fill animation with configurable speed and amplitude

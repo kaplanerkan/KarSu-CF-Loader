@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     `maven-publish`
-    signing
 }
 
 android {
@@ -48,7 +47,7 @@ afterEvaluate {
         publications {
             create<MavenPublication>("release") {
                 from(components["release"])
-                groupId = "com.karsu"
+                groupId = "com.github.kaplanerkan"
                 artifactId = "karsu_cf_loaders"
                 version = "2.0.0"
 
@@ -80,25 +79,17 @@ afterEvaluate {
             }
         }
 
-        repositories {
-            maven {
-                name = "sonatype"
-                val releasesRepoUrl = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-                val snapshotsRepoUrl = uri("https://oss.sonatype.org/content/repositories/snapshots/")
-                url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
-                credentials {
-                    username = findProperty("ossrhUsername") as String? ?: ""
-                    password = findProperty("ossrhPassword") as String? ?: ""
-                }
-            }
-        }
-    }
-
-    signing {
-        sign(publishing.publications["release"])
     }
 }
 
 dependencies {
     implementation(libs.androidx.core.ktx)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.test.core)
+
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(libs.espresso.core)
 }
