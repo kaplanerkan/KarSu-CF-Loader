@@ -10,7 +10,7 @@ A custom Android widget with rich text overlay, subtitle, auto-sizing, and shado
 |:---:|:---:|:---:|
 | ![Main](screenshots/scrcpy_7UqcI31Jaw.png) | ![Text Controls](screenshots/scrcpy_nNosFscUke.png) | ![RecyclerView](screenshots/scrcpy_rKyPHnW1A7.png) |
 
-https://github.com/kaplanerkan/KarSu-CF-Loader/raw/main/screenshots/scrcpy_jleYpcQWms.mp4
+https://github.com/user-attachments/assets/49aad72a-8ef0-4126-b0e3-f1c9d88c175a
 
 ## Features
 
