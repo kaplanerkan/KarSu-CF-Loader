@@ -96,5 +96,11 @@ class TextControlsActivity : AppCompatActivity() {
             val color = Color.HSVToColor(floatArrayOf(value, 1f, 1f))
             binding.karSuCfLoadersNoSrc.setTextColor(color)
         }
+
+        // Wave color slider: hue 0-360
+        binding.sliderWaveColor.addOnChangeListener { _, value, _ ->
+            val color = Color.HSVToColor(floatArrayOf(value, 1f, 1f))
+            binding.karSuCfLoadersNoSrc.setColor(color)
+        }
     }
 }
