@@ -2,7 +2,7 @@
 
 Circular Fillable Loader widget for Android with wave animation, text overlay, and extensive customization options.
 
-Based on [CircularFillableLoaders](https://github.com/lopspower/CircularFillableLoaders) by Mikhael LOPEZ, enhanced with rich text overlay, subtitle, auto-sizing, and shadow support.
+A custom Android widget with rich text overlay, subtitle, auto-sizing, and shadow support.
 
 ![Screenshot](screenshot.png)
 
@@ -108,12 +108,6 @@ The sample app contains three demo screens:
 
 ## License
 
-```
-Copyright 2018 LOPEZ MIKHAEL
+MIT License - Copyright (c) 2026 Erkan Kaplan (KarSu)
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-```
+See [LICENSE](LICENSE) for details.
