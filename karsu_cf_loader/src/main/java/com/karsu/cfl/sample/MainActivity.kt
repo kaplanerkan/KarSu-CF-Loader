@@ -13,10 +13,10 @@
 package com.karsu.cfl.sample
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.larswerkman.lobsterpicker.OnColorListener
 import com.karsu.cfl.sample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -74,13 +74,10 @@ class MainActivity : AppCompatActivity() {
             binding.karSuCfLoaders.setAmplitudeRatio(amplitudeRatio)
         }
 
-        // Wave color picker
-        binding.shadeslider.addOnColorListener(object : OnColorListener {
-            override fun onColorChanged(color: Int) {
-                binding.karSuCfLoaders.setColor(color)
-            }
-
-            override fun onColorSelected(color: Int) {}
-        })
+        // Wave color slider: hue 0-360
+        binding.sliderWaveColor.addOnChangeListener { _, value, _ ->
+            val color = Color.HSVToColor(floatArrayOf(value, 1f, 1f))
+            binding.karSuCfLoaders.setColor(color)
+        }
     }
 }

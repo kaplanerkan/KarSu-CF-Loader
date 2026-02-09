@@ -14,13 +14,13 @@
  */
 package com.karsu.cfl.sample
 
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.util.TypedValue
 import androidx.appcompat.app.AppCompatActivity
-import com.larswerkman.lobsterpicker.OnColorListener
 import com.karsu.cfl.sample.databinding.ActivityTextControlsBinding
 
 class TextControlsActivity : AppCompatActivity() {
@@ -91,13 +91,10 @@ class TextControlsActivity : AppCompatActivity() {
             binding.karSuCfLoadersNoSrc.setTextOffsetY(px)
         }
 
-        // Text color picker
-        binding.textColorSlider.addOnColorListener(object : OnColorListener {
-            override fun onColorChanged(color: Int) {
-                binding.karSuCfLoadersNoSrc.setTextColor(color)
-            }
-
-            override fun onColorSelected(color: Int) {}
-        })
+        // Text color slider: hue 0-360
+        binding.sliderTextColor.addOnChangeListener { _, value, _ ->
+            val color = Color.HSVToColor(floatArrayOf(value, 1f, 1f))
+            binding.karSuCfLoadersNoSrc.setTextColor(color)
+        }
     }
 }

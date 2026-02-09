@@ -176,11 +176,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/seekBarTextOffsetY" />
 
-                <com.larswerkman.lobsterpicker.sliders.LobsterShadeSlider
-                    android:id="@+id/textColorSlider"
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/sliderTextColor"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:stepSize="1"
+                    android:value="180"
+                    android:valueFrom="0"
+                    android:valueTo="360"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/labelTextColor" />
