@@ -4,7 +4,7 @@ Circular Fillable Loader widget for Android with wave animation, text overlay, a
 
 A custom Android widget with rich text overlay, subtitle, auto-sizing, and shadow support.
 
-![Screenshot](screenshot.png)
+<!-- Ekran goruntuleri screenshots/ dizininde bulunur -->
 
 ## Features
 
