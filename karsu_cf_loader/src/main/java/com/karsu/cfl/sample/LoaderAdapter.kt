@@ -25,7 +25,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.karsu.cfl.sample.databinding.ItemLoaderBinding
 
-class LoaderAdapter : ListAdapter<LoaderItem, LoaderAdapter.LoaderViewHolder>(LoaderDiffCallback) {
+class LoaderAdapter(
+    private val onItemClick: ((LoaderItem) -> Unit)? = null
+) : ListAdapter<LoaderItem, LoaderAdapter.LoaderViewHolder>(LoaderDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LoaderViewHolder {
         val binding = ItemLoaderBinding.inflate(
@@ -37,7 +39,9 @@ class LoaderAdapter : ListAdapter<LoaderItem, LoaderAdapter.LoaderViewHolder>(Lo
     }
 
     override fun onBindViewHolder(holder: LoaderViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val item = getItem(position)
+        holder.bind(item)
+        holder.itemView.setOnClickListener { onItemClick?.invoke(item) }
     }
 
     override fun onViewRecycled(holder: LoaderViewHolder) {

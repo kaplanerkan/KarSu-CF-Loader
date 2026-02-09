@@ -13,11 +13,17 @@ package com.karsu.cfl.sample
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.karsu.cfl.sample.databinding.ActivityRecyclerviewBinding
 
 class RecyclerViewActivity : AppCompatActivity() {
+
+    companion object {
+        private const val TAG = "KarSuCFL"
+    }
 
     private lateinit var binding: ActivityRecyclerviewBinding
 
@@ -28,10 +34,23 @@ class RecyclerViewActivity : AppCompatActivity() {
 
         binding.toolbar.setNavigationOnClickListener { finish() }
 
-        val adapter = LoaderAdapter()
+        val adapter = LoaderAdapter { item -> onItemClicked(item) }
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
         adapter.submitList(createSampleItems())
+    }
+
+    private fun onItemClicked(item: LoaderItem) {
+        val colorHex = "#%06X".format(0xFFFFFF and item.waveColor)
+        val info = "Title: ${item.title} | Progress: ${item.progress}% | Color: $colorHex" +
+            (item.text?.let { " | Text: $it" } ?: "") +
+            " | ShowProgress: ${item.showProgressText}"
+
+        Log.d(TAG, "Item clicked → $info")
+        Log.d(TAG, "  Description: ${item.description}")
+
+        binding.infoCard.visibility = View.VISIBLE
+        binding.textItemInfo.text = info
     }
 
     /**
